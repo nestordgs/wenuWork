@@ -51,10 +51,10 @@ export default {
     return {
       items: [
         {
-          title: 'List', route: 'characters.index', requiredLogin: false,
+          title: 'List Characters', route: 'characters.index', requiredLogin: false,
         },
         {
-          title: 'Favs', route: 'characters.index', requiredLogin: true,
+          title: 'Favorites Characters', route: 'characters.index', requiredLogin: true,
         },
       ],
     };

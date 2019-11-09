@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import Snotify, { SnotifyPosition } from 'vue-snotify';
+import middlware from './middleware';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -22,6 +23,8 @@ const options = {
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(Snotify, options);
+
+middlware(router);
 
 new Vue({
   router,
