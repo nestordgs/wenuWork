@@ -1,13 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Header />
+    <b-container class="mt-5 mb-5">
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </b-container>
+    <vue-snotify></vue-snotify>
   </div>
 </template>
 
+<script>
+import Header from './components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

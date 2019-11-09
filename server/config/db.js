@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import bluebird from 'bluebird';
 import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 const portDb = process.env.PORT_DB || 27017
 const dbName = process.env.DBNAME
