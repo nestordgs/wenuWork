@@ -57,7 +57,7 @@ export default {
         const response = await Api.login({
           email: this.user.email,
           password: this.user.password,
-        });
+        }, 'loginRequest');
 
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);

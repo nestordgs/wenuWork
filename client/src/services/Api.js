@@ -18,6 +18,16 @@ class ApiService {
       requestId: this.requestId,
     });
   }
+
+  async getCharacters(url, requestId, data = {}) {
+    this.requestId = requestId;
+    const params = Object.assign({
+      requestId: this.requestId,
+    }, data);
+
+    // eslint-disable-next-line no-return-await
+    return await axios.get(url, params);
+  }
 }
 
 export default new ApiService();
