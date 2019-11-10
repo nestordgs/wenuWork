@@ -36,6 +36,8 @@ export default new Vuex.Store({
   getters: {
     isAuth: state => state.isLoggedIn,
     getName: state => ((state.user) ? state.user.name : ''),
+    // eslint-disable-next-line no-underscore-dangle
+    getUserId: state => ((state.user) ? state.user._id : ''),
   },
   modules: {
   },
