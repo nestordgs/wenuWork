@@ -13,9 +13,10 @@ import store from './store';
 
 import './services/Filters';
 
+import './assets/css/styles.css';
+import 'vue-snotify/styles/simple.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import 'vue-snotify/styles/simple.css';
 
 const options = {
   toast: {

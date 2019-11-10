@@ -67,11 +67,11 @@ export default {
   data() {
     return {
       fields: [
-        { sortable: true, key: 'name' },
-        { sortable: true, key: 'gender' },
-        { sortable: true, key: 'species' },
-        { sortable: true, key: 'status' },
-        { sortable: true, key: 'location' },
+        { sortable: true, variant: 'text-left', key: 'name' },
+        { sortable: true, variant: 'text-left', key: 'gender' },
+        { sortable: true, variant: 'text-left', key: 'species' },
+        { sortable: true, variant: 'text-left', key: 'status' },
+        { sortable: true, variant: 'text-left', key: 'location' },
         { key: 'actions', label: ' ', class: 'text-right' },
       ],
       characters: [],
