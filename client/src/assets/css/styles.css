@@ -1,3 +1,7 @@
 .table-text-left {
     text-align: left !important;
 }
+
+.text-gold {
+    color: gold !important;
+}

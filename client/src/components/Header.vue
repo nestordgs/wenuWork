@@ -54,7 +54,7 @@ export default {
           title: 'List Characters', route: 'characters.index', requiredLogin: false,
         },
         {
-          title: 'My Favorites', route: 'characters.index', requiredLogin: true,
+          title: 'My Favorites', route: 'characters.favorites', requiredLogin: true,
         },
       ],
     };

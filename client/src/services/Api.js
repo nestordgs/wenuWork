@@ -53,6 +53,28 @@ class ApiService {
     // eslint-disable-next-line no-return-await
     return await axios.get(url, params);
   }
+
+  async post(url, data, requestId) {
+    this.requestId = requestId;
+    // eslint-disable-next-line no-return-await
+    return await axios.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${store.state.token}`,
+      },
+      requestId: this.requestId,
+    });
+  }
+
+  async delete(url, requestId) {
+    this.requestId = requestId;
+    // eslint-disable-next-line no-return-await
+    return await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${store.state.token}`,
+      },
+      requestId: this.requestId,
+    });
+  }
 }
 
 export default new ApiService();

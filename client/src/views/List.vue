@@ -33,11 +33,36 @@
           {{ data.item.location.name | capitalize }}
         </template>
         <template v-slot:cell(actions)="data">
-          <label :for="`start-favorite-${data.item.id}`" v-if="$store.getters.isAuth">
-            <input type="checkbox" name="" :id="`start-favorite-${data.item.id}`" class="d-none">
-            <font-awesome-icon icon="star" />
-          </label>
-          <span v-else>login to add favorites</span>
+            <b-btn
+              variant="link"
+              v-if="$store.getters.isAuth && myFavoritesIds.includes(data.item.id)"
+              @click="removeFavorites(data)"
+            >
+              <font-awesome-icon
+                icon="star"
+                :class="{
+                  'text-gold' : myFavoritesIds.includes(data.item.id),
+                }"
+              />
+            </b-btn>
+            <b-btn
+              variant="link"
+              v-if="$store.getters.isAuth && !myFavoritesIds.includes(data.item.id)"
+              @click="addToFavorites(data)"
+            >
+              <font-awesome-icon
+                icon="star"
+                :class="{
+                  'text-secondary': !myFavoritesIds.includes(data.item.id),
+                }"
+              />
+            </b-btn>
+          <b-link
+            v-if="!$store.getters.isAuth"
+            :to="{ name: 'login' }"
+          >
+            login to add favorites
+          </b-link>
         </template>
       </b-table>
     </b-row>
@@ -74,6 +99,7 @@ export default {
         { sortable: true, variant: 'text-left', key: 'location' },
         { key: 'actions', label: ' ', class: 'text-right' },
       ],
+      myFavoritesIds: [],
       characters: [],
       pagination: {},
       filter: {
@@ -106,6 +132,38 @@ export default {
         }
       }
     },
+    async getMyFavoritesIds() {
+      try {
+        const response = await Api.get(`favorites/ids/${this.$store.getters.getUserId}`, 'listFavoritesIds');
+        this.myFavoritesIds = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addToFavorites(character) {
+      try {
+        const characterFavorite = {
+          idUser: this.$store.getters.getUserId,
+          idCharacter: character.item.id,
+          dataCharacter: character.item,
+        };
+        await Api.post('/favorites', characterFavorite, 'addToFavorites');
+        this.$snotify.success(`${character.item.name} added successfully to favorites`, 'Success');
+        await this.getMyFavoritesIds();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async removeFavorites(character) {
+      try {
+        await Api.delete(`/favorites/${character.item.id}/${this.$store.getters.getUserId}`, 'removeFavorites');
+        this.$snotify.success(`${character.item.name} removed successfully to favorites`, 'Success');
+        await this.getMyFavoritesIds();
+      } catch (err) {
+        console.log(err);
+      }
+      // 'data.item.id'
+    },
     async filterData() {
       const queryObj = this.filter;
       Object.keys(queryObj).forEach((k) => {
@@ -127,8 +185,9 @@ export default {
       this.getCharacters();
     },
   },
-  mounted() {
-    this.getCharacters();
+  async mounted() {
+    await this.getMyFavoritesIds();
+    await this.getCharacters();
   },
 };
 </script>
