@@ -11,10 +11,11 @@
           :filter="filter"
           class="mb-3"
           @filterData="filterData"
-          @getFullData="getCharacters"
+          @getFullData="getDataWithOutFilters"
         />
       </b-col>
     </b-row>
+    <noRecords v-if="characters.length === 0"/>
     <b-row v-if="characters.length !== 0">
       <b-table
         responsive
@@ -40,7 +41,7 @@
         </template>
       </b-table>
     </b-row>
-    <b-row >
+    <b-row v-if="characters.length !== 0">
       <b-col>
         <b-pagination-nav
           align="center"
@@ -59,6 +60,7 @@
 <script>
 import Api from '../services/Api';
 import listCharactersFilter from '../components/filters/ListCharactersFilters.vue';
+import noRecords from '../components/NoRecords.vue';
 
 export default {
   name: 'listCharacters',
@@ -85,16 +87,24 @@ export default {
   watch: {},
   components: {
     listCharactersFilter,
+    noRecords,
   },
   methods: {
     lingGen: pageNumber => `/list/${pageNumber}`,
     async getCharacters() {
-      const route = (this.$route.params.id)
-        ? `https://rickandmortyapi.com/api/character/?page=${this.$route.params.id}`
-        : 'https://rickandmortyapi.com/api/character/?';
-      const response = await Api.getCharacters(route, 'listCharacters', this.filter);
-      this.characters = response.data.results;
-      this.pagination = response.data.info;
+      try {
+        const route = (this.$route.params.id)
+          ? `https://rickandmortyapi.com/api/character/?page=${this.$route.params.id}`
+          : 'https://rickandmortyapi.com/api/character/?';
+        const response = await Api.getCharacters(route, 'listCharacters', this.filter);
+        this.characters = response.data.results;
+        this.pagination = response.data.info;
+      } catch (err) {
+        if (err.response.data.error === 'There is nothing here') {
+          this.characters = [];
+          this.pagination = {};
+        }
+      }
     },
     async filterData() {
       const queryObj = this.filter;
@@ -105,6 +115,13 @@ export default {
       });
       this.$router.push({
         query: queryObj,
+      })
+        .catch(l => l);
+      this.getCharacters();
+    },
+    getDataWithOutFilters() {
+      this.$router.push({
+        name: 'characters.index',
       })
         .catch(l => l);
       this.getCharacters();
