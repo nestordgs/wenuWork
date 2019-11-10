@@ -8,13 +8,28 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item v-for="(item, index) in items" :key="index">
-            <b-link
-              :to="{ name: item.route }"
-              class="nav-link"
-              v-if="!item.requiredLogin || (item.requiredLogin && isAuth)"
-            >
-              {{ item.title }}
-            </b-link>
+            <template v-if="!('options' in item)">
+                <b-link
+                  :to="{ name: item.route }"
+                  class="nav-link"
+                  v-if="
+                    !item.requiredLogin
+                    || (item.requiredLogin && isAuth)
+                  "
+                >
+                  {{ item.title }}
+                </b-link>
+            </template>
+            <template v-else>
+                <b-nav-item-dropdown :text="item.title">
+                  <b-dropdown-item
+                    v-for="(dItem, index) in item.options" :key="index"
+                    :to="{ name: dItem.route }"
+                  >
+                    {{ dItem.title }}
+                  </b-dropdown-item>
+                </b-nav-item-dropdown>
+            </template>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -55,6 +70,23 @@ export default {
         },
         {
           title: 'My Favorites', route: 'characters.favorites', requiredLogin: true,
+        },
+        {
+          title: 'Charts',
+          options: [
+            {
+              title: 'N° Characters Vs State', route: 'characters.favorites', requiredLogin: true,
+            },
+            {
+              title: 'N° Characters Favorites Vs State', route: 'characters.favorites', requiredLogin: true,
+            },
+            {
+              title: 'N° Characters Vs Episodes', route: 'characters.favorites', requiredLogin: true,
+            },
+            {
+              title: 'N° Characters Favorites Vs Episodes', route: 'characters.favorites', requiredLogin: true,
+            },
+          ],
         },
       ],
     };
