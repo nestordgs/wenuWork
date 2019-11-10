@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import Snotify, { SnotifyPosition } from 'vue-snotify';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import {
+  faFilter, faStar, faStarAndCrescent, faStarHalf, faStarHalfAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import middlware from './middleware';
 import App from './App.vue';
 import router from './router';
@@ -21,6 +26,10 @@ const options = {
     pauseOnHover: false,
   },
 };
+
+library.add(faFilter, faStar, faStarAndCrescent, faStarHalf, faStarHalfAlt);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.config.productionTip = false;
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
