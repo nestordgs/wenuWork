@@ -3,7 +3,7 @@ import favoriteModel from '../models/favorites';
 class FavoriteController {
   async getFavorites(req, res) {
     try {
-      const { idUser } = req.body;
+      const { idUser } = req.params;
       const favorites = await favoriteModel.find({idUser});
       return res.status(200).send(favorites);
     } catch (err) {
