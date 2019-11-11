@@ -64,7 +64,7 @@ export default {
         this.$router.push({ name: 'home' });
         this.$snotify.success(`Welcome ${response.data.user.name}`, 'Success');
       } catch (err) {
-        console.error('err =>', err);
+        this.$snotify.error(err.response.data.message, 'Error');
       }
     },
   },

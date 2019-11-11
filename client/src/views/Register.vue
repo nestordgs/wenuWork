@@ -50,7 +50,7 @@
                 />
               </b-form-group>
               <p class="text-center">
-                <b-button type="submit" size="sm" variant="primary">Login</b-button>
+                <b-button type="submit" size="sm" variant="primary">Sign In</b-button>
               </p>
             </b-form>
           </div>
