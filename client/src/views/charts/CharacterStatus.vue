@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col>
-        <p>Characters By Episodes</p>
+        <p>Characters By Status</p>
       </b-col>
     </b-row>
     <b-row>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { groupBy } from 'lodash';
 import Api from '../../services/Api';
 
 export default {
@@ -31,6 +32,7 @@ export default {
         28, 29, 30, 31,
       ],
       charactersArrId: [],
+      charactersByStatus: null,
     };
   },
   components: {
@@ -46,23 +48,19 @@ export default {
           `https://rickandmortyapi.com/api/character/${this.charactersArrId}`,
         );
         this.allCharacters = responseCharacters.data;
-        const responseEpisodes = await Api.getCharactersMultiple(
-          `https://rickandmortyapi.com/api/episode/${this.charactersArrId}`,
-        );
-        this.allEpisodes = responseEpisodes.data;
         await this.prepareData();
       } catch (err) {
         console.log(err);
       }
     },
     prepareData() {
-      const rows = this.allEpisodes.map((e) => {
-        const characterByEpisode = this.allCharacters
-          .filter(ch => e.characters.includes(`https://rickandmortyapi.com/api/character/${ch.id}`))
-          .length;
+      this.charactersByStatus = groupBy(this.allCharacters, 'status');
+      const columns = Object.keys(this.charactersByStatus);
+      const rows = columns.map((k) => {
+        const status = k.charAt(0).toUpperCase() + k.slice(1);
         const obj = {
-          status: e.episode,
-          Characters: characterByEpisode,
+          status,
+          Characters: this.charactersByStatus[k].length,
         };
         return obj;
       });

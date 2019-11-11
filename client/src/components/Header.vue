@@ -86,10 +86,10 @@ export default {
               title: 'Vs. Status', route: 'charts.status', requiredLogin: false,
             },
             {
-              title: 'Vs. Episodes', route: 'characters.favorites', requiredLogin: true,
+              title: 'Vs. Episodes', route: 'charts.episodes', requiredLogin: false,
             },
             {
-              title: 'Favorites by Status', route: 'charts.status', requiredLogin: true,
+              title: 'Favorites by Status', route: 'charts.fav.status', requiredLogin: true,
             },
             {
               title: 'Favorites by Episodes', route: 'charts.fav.episodes', requiredLogin: true,

@@ -34,9 +34,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "favorites" */ '../views/MyFavorites.vue'),
   },
   {
-    path: '/charts/episode/',
+    path: '/charts/status/',
     name: 'charts.status',
-    component: () => import(/* webpackChunkName: "chartStatus" */ '../views/charts/CharacterEpisode.vue'),
+    component: () => import(/* webpackChunkName: "chartStatus" */ '../views/charts/CharacterStatus.vue'),
+  },
+  {
+    path: '/charts/episode/',
+    name: 'charts.episodes',
+    component: () => import(/* webpackChunkName: "chartEpisodes" */ '../views/charts/CharacterEpisode.vue'),
   },
   {
     path: '/charts/fav/status/',
