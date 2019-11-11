@@ -83,7 +83,7 @@ export default {
           title: 'Charts',
           options: [
             {
-              title: 'Vs. Status', route: 'characters.favorites', requiredLogin: true,
+              title: 'Vs. Status', route: 'charts.status', requiredLogin: false,
             },
             {
               title: 'Vs. Episodes', route: 'characters.favorites', requiredLogin: true,
