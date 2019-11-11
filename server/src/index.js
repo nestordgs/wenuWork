@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+import '../config/passport';
+
 app.set('port', port);
 
 dataBase;
