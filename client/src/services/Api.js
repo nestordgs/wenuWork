@@ -4,7 +4,7 @@ import store from '../store';
 
 axiosCancel(axios);
 
-axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.baseURL = `${process.env.VUE_APP_API_URL}/api/`;
 
 class ApiService {
   constructor() {

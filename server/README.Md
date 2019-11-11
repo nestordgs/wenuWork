@@ -7,7 +7,7 @@ Before install dependencies create a __.env__ or copy __sample-env__ and rename 
 cp sample-env .env
 ```
 
-change __.env__ values for your favorites, the install dependencies
+Change __.env__ values for your favorites, then install dependencies
 
 ### If you have __docker__ and __docker-compose__ installed in your PC: 
 
