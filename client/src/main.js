@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faFilter, faStar, faStarAndCrescent, faStarHalf, faStarHalfAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import VCharts from 'v-charts';
+
 import middlware from './middleware';
 import App from './App.vue';
 import router from './router';
@@ -34,6 +36,7 @@ Vue.config.productionTip = false;
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
+Vue.use(VCharts);
 Vue.use(Snotify, options);
 
 middlware(router);
