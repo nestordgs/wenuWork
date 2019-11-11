@@ -57,12 +57,29 @@
                 }"
               />
             </b-btn>
-          <b-link
+          <b-btn
+            variant="link"
             v-if="!$store.getters.isAuth"
             :to="{ name: 'login' }"
+            size="sm"
+            class="text-secondary opacity-3"
+            title="Login to add favorites"
+            :id="`favorite-${data.item.id}`"
           >
-            login to add favorites
-          </b-link>
+            <font-awesome-icon
+              icon="star"
+              :class="{
+                'text-gold' : myFavoritesIds.includes(data.item.id),
+              }"
+            />
+          </b-btn>
+          <b-tooltip
+            :target="`favorite-${data.item.id}`"
+            triggers="hover"
+            placement="left"
+          >
+            Login to add favorites
+          </b-tooltip>
         </template>
       </b-table>
     </b-row>
@@ -134,8 +151,10 @@ export default {
     },
     async getMyFavoritesIds() {
       try {
-        const response = await Api.get(`favorites/ids/${this.$store.getters.getUserId}`, 'listFavoritesIds');
-        this.myFavoritesIds = response.data;
+        if (this.$store.getters.isAuth) {
+          const response = await Api.get(`favorites/ids/${this.$store.getters.getUserId}`, 'listFavoritesIds');
+          this.myFavoritesIds = response.data;
+        }
       } catch (err) {
         console.log(err);
       }

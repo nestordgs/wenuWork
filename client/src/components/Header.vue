@@ -22,12 +22,20 @@
             </template>
             <template v-else>
                 <b-nav-item-dropdown :text="item.title">
-                  <b-dropdown-item
-                    v-for="(dItem, index) in item.options" :key="index"
-                    :to="{ name: dItem.route }"
+                  <template
+                    v-for="(dItem, index) in item.options"
                   >
-                    {{ dItem.title }}
-                  </b-dropdown-item>
+                    <b-dropdown-item
+                      v-if="
+                        !dItem.requiredLogin
+                        || (dItem.requiredLogin && isAuth)
+                      "
+                      :to="{ name: dItem.route }"
+                      :key="index"
+                    >
+                      {{ dItem.title }}
+                    </b-dropdown-item>
+                  </template>
                 </b-nav-item-dropdown>
             </template>
           </b-nav-item>
