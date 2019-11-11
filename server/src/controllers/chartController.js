@@ -4,7 +4,7 @@ import lodash from 'lodash';
 
 class ChartController {
 
-  async getFavoritesBystatus(req, res) {
+  async getFavoritesByStatus(req, res) {
     try {
       const { idUser } = req.params;
       const favorites = await favoritesModel.find({
@@ -22,11 +22,11 @@ class ChartController {
         const status = k.charAt(0).toUpperCase() + k.slice(1);
         rows.push({
           status,
-          characters: favoritesBystatus[k].length,
+          "Fav's Characters": favoritesBystatus[k].length,
         })
       });
       const dataChart = {
-        columns: ['status', 'characters'],
+        columns: ['status', "Fav's Characters"],
         rows
       };
       return res.status(200).send(dataChart);
