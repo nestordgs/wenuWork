@@ -6,7 +6,10 @@ class ChartController {
 
   async getFavoritesBystatus(req, res) {
     try {
-      const favorites = await favoritesModel.find();
+      const { idUser } = req.params;
+      const favorites = await favoritesModel.find({
+        idUser,
+      });
       const allCharacters = []
       favorites.forEach(character => {
         const string = JSON.stringify(character.dataCharacter);
