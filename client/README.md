@@ -1,6 +1,14 @@
 # Client - Frontend
 
 ## Project setup
+
+Before install dependencies create a __.env__ or copy __sample-env__ and rename it __.env__ file with environments vars.
+```
+cp sample-env .env
+```
+
+Change __.env__ values for your favorites, then install dependencies
+
 ```
 npm install
 ```
