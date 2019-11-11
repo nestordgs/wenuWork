@@ -41,6 +41,15 @@ class ApiService {
     return await axios.get(newUrl, params);
   }
 
+  async getCharactersMultiple(url, requestId, data = {}) {
+    this.requestId = requestId;
+    const params = Object.assign({
+      requestId: this.requestId,
+    }, data);
+    // eslint-disable-next-line no-return-await
+    return await axios.get(url, params);
+  }
+
   async get(url, requestId, data = {}) {
     this.requestId = requestId;
     const params = Object.assign({

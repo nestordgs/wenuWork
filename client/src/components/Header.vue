@@ -75,16 +75,16 @@ export default {
           title: 'Charts',
           options: [
             {
-              title: 'N° Characters Vs State', route: 'characters.favorites', requiredLogin: true,
+              title: 'Vs. Status', route: 'characters.favorites', requiredLogin: true,
             },
             {
-              title: 'N° Characters Favorites Vs State', route: 'characters.favorites', requiredLogin: true,
+              title: 'Vs. Episodes', route: 'characters.favorites', requiredLogin: true,
             },
             {
-              title: 'N° Characters Vs Episodes', route: 'characters.favorites', requiredLogin: true,
+              title: 'Favorites by Status', route: 'charts.status', requiredLogin: true,
             },
             {
-              title: 'N° Characters Favorites Vs Episodes', route: 'characters.favorites', requiredLogin: true,
+              title: 'Favorites by Episodes', route: 'charts.fav.episodes', requiredLogin: true,
             },
           ],
         },

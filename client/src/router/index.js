@@ -50,6 +50,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/charts/CharacterFavStatus.vue'),
   },
+  {
+    path: '/charts/fav/episode/',
+    name: 'charts.fav.episodes',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/charts/CharacterFavEpisode.vue'),
+  },
 ];
 
 const router = new VueRouter({

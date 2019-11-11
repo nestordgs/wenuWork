@@ -7,7 +7,7 @@
     </b-row>
     <b-row>
       <b-col md="5" class="mx-auto">
-        <ve-histogram loading :data="datacollection"></ve-histogram>
+        <ve-line loading :data="datacollection"></ve-line>
       </b-col>
     </b-row>
   </div>
@@ -22,14 +22,6 @@ export default {
     return {
       nCharacters: 493,
       datacollection: null,
-      chartData: {
-        columns: ['status', 'alive', 'dead', 'number'],
-        rows: [
-          { status: 'alive', alive: 3 },
-          { status: 'dead', dead: 1 },
-          { status: 'Unknown', number: 1 },
-        ],
-      },
     };
   },
   components: {
