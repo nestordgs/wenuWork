@@ -12,6 +12,10 @@ const RedirectIfAuthenticated = (router) => {
         return next();
       case 'characters.index':
         return next();
+      case 'charts.status':
+        return next();
+      case 'charts.episodes':
+        return next();
       case 'home':
         return next();
       default:
