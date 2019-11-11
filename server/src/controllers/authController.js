@@ -15,12 +15,21 @@ class AuthController {
 
   async register (req, res) {
     try {
-      const { email, password, name } = req.body;
+      const { email, password, name, confirmPassword } = req.body;
 
       const user = await userModel.findOne({ email });
       if (user) {
-        const error = 'Email already exists.';
-        return res.status(400).json(error);
+        const errors = {
+          message: 'Email already exists.'
+        };
+        return res.status(400).json(errors);
+      }
+
+      if (password !== confirmPassword) {
+        const errors = {
+          message: 'Password and Confirm Password is not the same.'
+        };
+        return res.status(403).send(errors);
       }
 
       const newUser = new userModel({
@@ -31,6 +40,11 @@ class AuthController {
 
       const saved = await newUser.save();
 
+      saved.password = undefined;
+      const userJson = saved.toJSON();
+      res.send({
+        user: userJson,
+      })
       res.send(saved);
     } catch (err) {
       console.error('err =>', err);

@@ -1,0 +1,5 @@
+MY_SECRET=supersecret
+DBNAME=yourdatabase
+DB_HOST=127.0.0.1
+PORT_DB=27017
+PORT=5000
