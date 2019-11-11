@@ -45,6 +45,15 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
             <b-link
+              :to="{ name: 'register' }"
+              class="nav-link"
+              v-if="!isAuth"
+            >
+              Sign In
+            </b-link>
+          </b-nav-item>
+          <b-nav-item>
+            <b-link
               :to="{ name: 'login' }"
               class="nav-link"
               v-if="!isAuth"

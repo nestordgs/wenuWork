@@ -19,6 +19,14 @@ class ApiService {
     });
   }
 
+  async register(credentials, requestId) {
+    this.requestId = requestId;
+    // eslint-disable-next-line no-return-await
+    return await axios.post('/register', credentials, {
+      requestId: this.requestId,
+    });
+  }
+
   async getCharacters(url, requestId, data = {}) {
     this.requestId = requestId;
     const params = Object.assign({

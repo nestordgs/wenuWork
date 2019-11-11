@@ -10,6 +10,8 @@ const RedirectIfAuthenticated = (router) => {
     switch (to.name) {
       case 'login':
         return next();
+      case 'register':
+        return next();
       case 'characters.index':
         return next();
       case 'charts.status':

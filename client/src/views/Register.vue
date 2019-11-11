@@ -2,9 +2,20 @@
   <div>
     <b-row>
       <b-col cols="10" sm="10" md="7" class="mx-auto">
-        <b-card title="Login">
+        <b-card title="Sign In">
           <div>
             <b-form @submit.prevent="onSubmit">
+              <b-form-group label="Name:" label-align="left">
+                <b-input
+                  id="name"
+                  name="name"
+                  type="text"
+                  size="sm"
+                  v-model.trim="user.name"
+                  required
+                  placeholder="Enter your name"
+                />
+              </b-form-group>
               <b-form-group label="Email Address:" label-align="left">
                 <b-input
                   id="email"
@@ -27,6 +38,17 @@
                   placeholder="Enter your password"
                 />
               </b-form-group>
+              <b-form-group label="Confirm Password:" label-align="left">
+                <b-input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  size="sm"
+                  v-model.trim="user.confirmPassword"
+                  required
+                  placeholder="Confirm your password"
+                />
+              </b-form-group>
               <p class="text-center">
                 <b-button type="submit" size="sm" variant="primary">Login</b-button>
               </p>
@@ -46,24 +68,27 @@ export default {
   data() {
     return {
       user: {
+        name: '',
         email: '',
         password: '',
+        confirmPassword: '',
       },
     };
   },
   methods: {
     async onSubmit() {
       try {
-        const response = await Api.login({
+        await Api.register({
+          name: this.user.name,
           email: this.user.email,
           password: this.user.password,
+          confirmPassword: this.user.confirmPassword,
         }, 'loginRequest');
 
-        this.$store.dispatch('setToken', response.data.token);
-        this.$store.dispatch('setUser', response.data.user);
-        this.$router.push({ name: 'home' });
-        this.$snotify.success(`Welcome ${response.data.user.name}`, 'Success');
+        this.$router.push({ name: 'login' });
+        this.$snotify.success('Sign In successfully, please login to add favorites.', 'Success');
       } catch (err) {
+        this.$snotify.error(err.response.data.message, 'Error');
         console.error('err =>', err);
       }
     },
