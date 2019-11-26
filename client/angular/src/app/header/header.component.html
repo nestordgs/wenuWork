@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">wenuWork</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngFor="let route of routes" [ngClass]="{dropdown: route.options}">
+        <a *ngIf="!route.options;else isDropdown" class="nav-link" href="#">{{ route.title }}</a>
+        <ng-template #isDropdown>
+          <a
+            id="{{ route.title.toLocaleLowerCase() }}_dropdown"
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >
+            {{ route.title }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#" *ngFor="let childRoute of route.options">
+              {{ childRoute.title }}
+            </a>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</nav>
